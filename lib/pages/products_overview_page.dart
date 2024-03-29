@@ -24,6 +24,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.yellow,
        title: const Text('Minha Loja', style: TextStyle(color: Colors.black)
        ),centerTitle: true,
@@ -69,6 +70,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
       ),
       body: ProductGrid(_showFavoriteOnly),
      drawer: AppDrawer(),
+     
     );
   }
 }

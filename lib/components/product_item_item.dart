@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/models/cart.dart';
@@ -8,14 +6,11 @@ import '../models/product.dart';
 import '../utils/app_routes.dart';
 
 class ProductItem extends StatelessWidget {
- 
   @override
- 
- 
   Widget build(BuildContext context) {
     // TODO: implement build
- final product = Provider.of<Product>(context, listen: false);
-  final cart = Provider.of<Cart>(context);
+    final product = Provider.of<Product>(context, listen: false);
+    final cart = Provider.of<Cart>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -37,19 +32,35 @@ class ProductItem extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           leading: Consumer<Product>(
-            builder:(ctx, product, _) =>  IconButton(
+            builder: (ctx, product, _) => IconButton(
               onPressed: () {
-                  product.toggleFavorite();
-          
-          
+                product.toggleFavorite();
               },
-              icon: Icon(product.isFavorite? Icons.favorite : Icons.favorite_border ),
+              icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
               color: Theme.of(context).canvasColor,
             ),
           ),
           trailing: IconButton(
-            onPressed: () {cart.addItem(product);},
-            icon: Icon(Icons.shopping_cart, ),
+            onPressed: () {
+              cart.addItem(product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Produto adicionado com sucesso!'),
+                  duration: Duration(seconds: 1),
+                  action: SnackBarAction(
+                    label: 'DESFAZER',
+                    
+                    onPressed: () {
+                      cart.removeSigleItem(product.id);
+                    },
+                  ),
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.shopping_cart,
+            ),
             color: Theme.of(context).canvasColor,
           ),
           backgroundColor: Colors.black54,
