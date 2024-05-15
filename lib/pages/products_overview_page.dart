@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/components/app_drawer.dart';
-import 'package:shop/components/badgee.dart';
-import 'package:shop/components/product_grid.dart';
-import 'package:shop/models/cart.dart';
-import 'package:shop/utils/app_routes.dart';
+
+import '../components/app_drawer.dart';
+import '../components/product_grid.dart';
+import '../models/cart.dart';
+import '../utils/app_routes.dart';
+
 enum FilterOptions {
   favorite,
   all,
@@ -24,14 +25,10 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.yellow,
-       title: const Text('Minha Loja', style: TextStyle(color: Colors.black)
-       ),centerTitle: true,
+        title: const Text('Minha Loja'),
         actions: [
           PopupMenuButton(
-            icon: const Icon(Icons.more_vert,color: Colors.black,),
-          
+            icon: const Icon(Icons.more_vert),
             itemBuilder: (_) => [
               const PopupMenuItem(
                 value: FilterOptions.favorite,
@@ -52,25 +49,22 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
               });
             },
           ),
-        
           Consumer<Cart>(
             child: IconButton(
-                onPressed: () {Navigator.of(context).pushNamed(AppRoutes.CART);},
-                icon: Icon(Icons.shopping_cart),
-                color: Colors.black, 
-              ),
-            builder : (ctx,cart, child) => 
-            Badgee(
-              value:cart.itemsCount.toString(),
-              
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.cart);
+              },
+              icon: const Icon(Icons.shopping_cart),
+            ),
+            builder: (ctx, cart, child) => Badge(
+              label: Text(cart.itemsCount.toString()),
               child: child!,
-            ), 
+            ),
           ),
         ],
       ),
       body: ProductGrid(_showFavoriteOnly),
-     drawer: AppDrawer(),
-     
+      drawer: const AppDrawer(),
     );
   }
 }

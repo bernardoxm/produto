@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/models/cart.dart';
-import 'package:shop/models/order_list.dart';
-import 'package:shop/pages/cart_page.dart';
-import 'package:shop/pages/orders_page.dart';
-import 'package:shop/pages/product_page.dart';
 
-import '/models/product_list.dart';
-import '/pages/product_detail_page.dart';
-import '/pages/products_overview_page.dart';
-import '/utils/app_routes.dart';
+import '../models/cart.dart';
+import '../models/order_list.dart';
+import '../models/product_list.dart';
+import '../pages/cart_page.dart';
+import '../pages/orders_page.dart';
+import '../pages/producs_from_page.dart';
+import '../pages/product_detail_page.dart';
+import '../pages/products_overview_page.dart';
+import '../pages/products_page.dart';
+import '../utils/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,25 +37,19 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch().copyWith(
-            primary: Colors.yellow,
+            primary: Colors.purple,
             secondary: Colors.deepOrange,
           ),
           fontFamily: 'Lato',
-          textTheme: TextTheme(
-            headline6: TextStyle(
-              color: Colors.black,
-              fontSize: 20, // Tamanho do texto da AppBar
-              fontWeight: FontWeight.bold,
-            ),
-          ),
         ),
-        home: const ProductsOverviewPage(),
+        // home: const ProductsOverviewPage(),
         routes: {
-          AppRoutes.HOME: (ctx) => ProductsOverviewPage(),
-          AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailPage(),
-          AppRoutes.CART: (ctx) => CartPage(),
-          AppRoutes.ORDERS: (ctx) => OrdersPage(),
-          AppRoutes.PRODUCTS: (ctx) => ProductPage(),
+          AppRoutes.home: (ctx) => const ProductsOverviewPage(),
+          AppRoutes.productDetail: (ctx) => const ProductDetailPage(),
+          AppRoutes.cart: (ctx) => const CartPage(),
+          AppRoutes.orders: (ctx) => const OrdersPage(),
+          AppRoutes.products: (ctx) => const ProductsPage(),
+          AppRoutes.productsform: (ctx) => const ProductFormPage(),
         },
         debugShowCheckedModeBanner: false,
       ),
